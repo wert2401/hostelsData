@@ -43,9 +43,63 @@ function getGroupsByColumnName(data, columnName) {
     return divData;
 }
 
-function getAvarageValues(dividedData) {
+function getValuesWithKeys(obj) {
+    let result = [];
+
+    let vals = Object.values(obj);
+    let keys = Object.keys(obj);
+
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const val = vals[i];
+
+        if (typeof obj[key] != 'object')
+            result.push({
+                [key]: val
+            });
+        else
+            result.push(...getValuesWithKeys(vals[i]));
+    }
+
+    return result;
+}
+
+function getAvarageValuesByKeys(obj) {
+    let res = {};
+    let counts = {};
+
+    let objs = getValuesWithKeys(obj);
+    objs.forEach(element => {
+        let key = Object.keys(element)[0];
+        let value = Object.values(element)[0];
+        if (typeof value == 'number') {
+            if (Object.keys(res).includes(key)) {
+                res[key] += value;
+            } else {
+                res[key] = value;
+            }
+            if (Object.keys(counts).includes(key)) {
+                counts[key] += 1;
+            } else {
+                counts[key] = 1;
+            }
+        }
+
+    });
+
+    Object.keys(counts).forEach(key => {
+        res[key] = res[key] / counts[key];
+    })
+
+    return res;
+}
+
+//todo avarage for all data
+
+function getAvarageValuesByGroups(dividedData) {
     let avarage = {}
     let groupsId = Object.keys(dividedData);
+
 
     groupsId.forEach(group => {
         let values = {};
@@ -78,6 +132,7 @@ function getAvarageValues(dividedData) {
 contextBridge.exposeInMainWorld('data', {
     all: (path) => convertExcelFileToJsonUsingXlsx(path),
     divideByGroups: (data, columnName) => getGroupsByColumnName(data, columnName),
-    avarage: (dividedData) => getAvarageValues(dividedData),
+    avarage: (dividedData) => getAvarageValuesByGroups(dividedData),
+    avarageByKeys: (obj) => getAvarageValuesByKeys(obj),
     test: () => "Test"
 });
