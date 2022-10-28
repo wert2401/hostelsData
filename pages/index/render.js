@@ -1,7 +1,13 @@
+//data объявляется в конце excelReader.js
 let json = data.all('./excel/data.xlsx');
 console.log("Все записи", json);
 
-let divData = data.divideByGroups(json, 'Из какого вы общежития?');
+//Среднее по всему кварталам
+let avarageAll = data.avarageByKeys(json);
+console.log("Среднее по всем данным", avarageAll);
+
+//Квартал 1 (json[Object.keys(json)[0]], 0 отвечает за номер квартала)
+let divData = data.divideByGroups(json[Object.keys(json)[0]], 'Из какого вы общежития?');
 console.log("Группированне записи", divData);
 
 console.log("Средние по группам");

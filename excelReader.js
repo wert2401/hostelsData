@@ -8,7 +8,7 @@ function convertExcelFileToJsonUsingXlsx(path) {
     const sheetNames = file.SheetNames;
     const totalSheets = sheetNames.length;
     // Variable to store our data 
-    let parsedData = [];
+    let parsedData = {};
     // Loop through sheets
     for (let i = 0; i < totalSheets; i++) {
         // Convert to json using xlsx
@@ -16,7 +16,7 @@ function convertExcelFileToJsonUsingXlsx(path) {
         // Skip header row which is the colum names
         tempData.shift();
         // Add the sheet's json to our data array
-        parsedData.push(...tempData);
+        parsedData[sheetNames[i]] = [...tempData];
     }
 
     return parsedData;
@@ -84,7 +84,6 @@ function getAvarageValuesByKeys(obj) {
                 counts[key] = 1;
             }
         }
-
     });
 
     Object.keys(counts).forEach(key => {
@@ -94,12 +93,9 @@ function getAvarageValuesByKeys(obj) {
     return res;
 }
 
-//todo avarage for all data
-
 function getAvarageValuesByGroups(dividedData) {
     let avarage = {}
     let groupsId = Object.keys(dividedData);
-
 
     groupsId.forEach(group => {
         let values = {};
