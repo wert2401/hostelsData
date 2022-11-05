@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="../shared/style.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+      <title>Колесо баланса</title>
+  </head>
+  <body>
+      <h2>Настройки</h2>
+      <div class="window"> 
+          <div class="left_side">
+              <span> 1. Выберите столбец, по которому происходит группировка</span>
+                  <select class="select-css" >
+                      <option>Заголовок столбца 1</option>
+                      <option>Заголовок столбца 2</option>
+                      <option>Заголовок столбца 3</option>
+                    </select>
+
+          </div>
+          <div class="right_side">
+                <fieldset>
+                  <legend>2. Выберите столбцы, которые необходимо исключить из построения диаграммы</legend>
+                  <div>
+                      <input type="checkbox" id="col1" name="exclude_cols" value="col1" />
+                      <label for="col1">Заголовок столбца 1</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="col2" name="exclude_cols" value="col2" />
+                      <label for="col2">Заголовок столбца 2</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="col3" name="exclude_cols" value="col3" />
+                      <label for="col3">Заголовок столбца 3</label>
+                    </div>
+                </fieldset>
+
+          </div>
+      </div>
+      <div class="buttons">
+        <button class="button"name="Back" onclick="clickBackBtn()">Назад</button>
+        <button class="button" name="Apply" onclick="clickApplyBtn()">Применить</button>
+      </div>
+  </body>
+</html>
