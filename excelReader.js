@@ -1,7 +1,8 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 const xlsx = require('xlsx');
 
-function convertExcelFileToJsonUsingXlsx(path) {
+async function convertExcelFileToJsonUsingXlsx() {
+    let path = await getFilePath();
     // Read the file using pathname
     const file = xlsx.readFile(path);
     // Grab the sheet info from the file
@@ -18,7 +19,6 @@ function convertExcelFileToJsonUsingXlsx(path) {
         // Add the sheet's json to our data array
         parsedData[sheetNames[i]] = [...tempData];
     }
-
     return parsedData;
 }
 
@@ -125,10 +125,31 @@ function getAvarageValuesByGroups(dividedData) {
     return avarage;
 }
 
+function openAndSetFilePath() {
+    return ipcRenderer.invoke('dialog:openFile').then(c => {
+        ipcRenderer.invoke("setFilePath", c);
+    });
+}
+
+async function getFilePath() {
+    return await ipcRenderer.invoke("getFilePath");
+}
+
+async function SetFilter(filter) {
+    return await ipcRenderer.invoke("setFilter", filter);
+}
+
+async function GetFilter() {
+    return await ipcRenderer.invoke("getFilter");
+}
+
 contextBridge.exposeInMainWorld('data', {
-    all: (path) => convertExcelFileToJsonUsingXlsx(path),
+    all: async() => await convertExcelFileToJsonUsingXlsx(),
     divideByGroups: (data, columnName) => getGroupsByColumnName(data, columnName),
     avarage: (dividedData) => getAvarageValuesByGroups(dividedData),
     avarageByKeys: (obj) => getAvarageValuesByKeys(obj),
-    test: () => "Test"
+    openFile: () => openAndSetFilePath(),
+    file: () => getFilePath(),
+    setFilter: async(filter) => await SetFilter(filter),
+    getFilter: async() => await GetFilter(),
 });
