@@ -21,12 +21,7 @@ async function clickApplyBtn() {
 
     await data.setFilter(filter);
 
-    let f = await data.getFilter();
-
-    console.log(f);
-
-    let divData = data.divideByGroups(json[Object.keys(json)[0]], f.columnGroup);
-    console.log("Группированне записи", divData);
+    window.location.href = "../clubWheel/clubWheel.html";
 }
 
 data.all().then(d => {

@@ -153,3 +153,23 @@ contextBridge.exposeInMainWorld('data', {
     setFilter: async(filter) => await SetFilter(filter),
     getFilter: async() => await GetFilter(),
 });
+
+async function getConfingSegments(data) {
+    segments = []
+    filter = await GetFilter();
+    Object.keys(data).forEach(el => {
+        if (!filter.unsedColumns.includes(el)) {
+            let color = "#5CB975";
+            if (data[el < 5])
+                color = "#EE685D";
+            if (data[el] < 8)
+                color = "#FBC937";
+            segments.push({ color: color, text: el, level: data[el] })
+        }
+    })
+    return segments;
+}
+
+contextBridge.exposeInMainWorld('wheelService', {
+    getConfigSegments: async(data) => await getConfingSegments(data)
+});
