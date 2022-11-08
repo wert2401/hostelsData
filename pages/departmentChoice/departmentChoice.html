@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../shared/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="../shared/js/wheel.js"></script>
+    <title>Колесо баланса</title>
+</head>
+
+<body>
+    <h2>Выберите отдел</h2>
+    <div class="window">
+        <form>
+            <div>
+                <input type="radio" id="departmentChoice"
+                    name="department" value="firstDepartment" checked>
+                <label for="departmentChoice1">5 общежитие</label>
+            </div>
+            <div>
+                <input type="radio" id="departmentChoice"
+                    name="department" value="secondDepartment">
+                <label for="departmentChoice2">21 общежитие</label>
+            </div>
+            <div>
+                <input type="radio" id="departmentChoice"
+                    name="department" value="thirdDepartment">
+                <label for="departmentChoice3">30 общежитие</label>
+            </div>
+        </form>
+    </div>
+    <div class="buttons">
+        <button class="button" name="Back" onclick="clickBackBtn()">Назад</button>
+        <button class="button" name="Apply" onclick="clickApplyBtn()">Применить</button>
+    </div>
+</body>
+<script src="render.js"></script>
+
+</html>
