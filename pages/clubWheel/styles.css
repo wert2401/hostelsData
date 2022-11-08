@@ -11,14 +11,3 @@
     justify-content: center;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 5%;
-}
-
-.body{
-    display:flex;
-    align-items: center;
-}

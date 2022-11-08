@@ -25,13 +25,6 @@ label{
     font-size: 1.2rem;
 }
 
-.buttons{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 5%;
-}
-
 .select-css { 
     display: block; 
     font-size: 16px; 
