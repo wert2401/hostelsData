@@ -23,6 +23,13 @@ async function convertExcelFileToJsonUsingXlsx() {
 }
 
 function getGroupsByColumnName(data, columnName) {
+    let temp = []
+    Object.keys(data).forEach(k => {
+        temp = temp.concat(data[k]);
+    })
+
+    data = temp;
+
     let groupsId = []
     data.forEach(element => {
         if (!groupsId.includes(element[columnName])) {

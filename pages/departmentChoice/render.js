@@ -15,8 +15,10 @@ async function clickApplyBtn() {
 (async() => {
     let alldata = await data.all();
     let filter = await data.getFilter();
-    console.log(Object.keys(divided));
-    console.log(Object.keys(divided));
+    console.log(alldata);
+    console.log(filter.columnGroup);
     let divided = data.divideByGroups(alldata, filter.columnGroup)
     console.log(Object.keys(divided));
+
+
 })();
