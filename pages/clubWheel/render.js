@@ -3,7 +3,7 @@ function clickBackBtn() {
 }
 
 async function clickApplyBtn() {
-
+    window.location.href = "../сomparisonChoice/comparisonChoice.html";
 }
 
 (async() => {

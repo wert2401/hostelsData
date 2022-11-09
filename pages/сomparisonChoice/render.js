@@ -1,31 +1,20 @@
 function clickBackBtn() {
-    window.location.href = "../settings/settings.html";
+    window.location.href = "../clubWheel/clubWheel.html";
 }
 
 async function clickApplyBtn() {
-
+    let ch = document.querySelector('input[name="comparison"]:checked').value;
+    switch (ch) {
+        case "departmentsByQuarter":
+            window.location.href = "../departmentChoice/departmentChoice.html";
+            break;
+        case "departmentByQuarters":
+            window.location.href = "../periodChoice/periodChoice.html";
+            break;
+        case "clubByQuarters":
+            //window.location.href = "../clubQuarterWheels/clubQuarterWheels.html";
+            break;
+        default:
+            break;
+    }
 }
-
-(async() => {
-    let filter = await data.getFilter();
-    let alldata = await data.all();
-    let averData = data.avarageByKeys(alldata);
-
-    console.log(filter);
-    console.log(data.avarageByKeys(alldata));
-
-    var config = {};
-
-    config.segments = await wheelService.getConfigSegments(averData);
-
-    config.radius = 200; // optional. Default calculated based in canvas size
-    config.levels = 10; // optional. Default 10
-    config.fontSize = 15; // optional. Default 15px
-
-    let canvas = document.getElementById("canvas");
-
-    const wheel = new Wheel(canvas, config);
-    wheel.draw();
-
-    canvas.click(false);
-})();
