@@ -12,7 +12,7 @@ async function clickApplyBtn() {
             window.location.href = "../periodChoice/periodChoice.html";
             break;
         case "clubByQuarters":
-            //window.location.href = "../clubQuarterWheels/clubQuarterWheels.html";
+            window.location.href = "../clubQuarterWheels/clubQuarterWheels.html";
             break;
         default:
             break;

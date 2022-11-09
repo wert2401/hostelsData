@@ -1,0 +1,17 @@
+.wheel {
+    margin: 0 auto;
+    width: 100vw;
+    height: 50vh;
+    color: #DBFF00;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.wheels{
+    display: flex;
+    flex-direction: row;
+}
