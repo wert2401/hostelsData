@@ -1,5 +1,5 @@
 function clickBackBtn() {
-    window.location.href = "../settings/settings.html";
+    window.location.href = "../сomparisonChoice/comparisonChoice.html";
 }
 
 async function clickApplyBtn() {
