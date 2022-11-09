@@ -1,9 +1,9 @@
 function clickBackBtn() {
-    window.location.href = "../сomparisonChoice/comparisonChoice.html";
+    window.location.href = "../periodChoice/periodChoice.html";
 }
 
 async function clickApplyBtn() {
-    window.location.href = "../quarterWheels/quarterWheels.html"; //вне зависимости от выбора на странице, осуществляется переход на шаблонную страницу с кружками
+
 }
 
 (async() => {
@@ -22,10 +22,24 @@ async function clickApplyBtn() {
     config.levels = 10; // optional. Default 10
     config.fontSize = 15; // optional. Default 15px
 
-    let canvas = document.getElementById("canvas");
+    let canvas1 = document.getElementById("canvas1");
 
-    const wheel = new Wheel(canvas, config);
-    wheel.draw();
+    const wheel1 = new Wheel(canvas1, config);
+    wheel1.draw();
 
-    canvas.click(false);
+    canvas1.click(false);
+
+    let canvas2 = document.getElementById("canvas2");
+
+    const wheel2 = new Wheel(canvas2, config);
+    wheel2.draw();
+
+    canvas2.click(false);
+
+    let canvas3 = document.getElementById("canvas3");
+
+    const wheel3 = new Wheel(canvas3, config);
+    wheel3.draw();
+
+    canvas3.click(false);
 })();

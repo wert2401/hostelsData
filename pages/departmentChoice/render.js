@@ -3,7 +3,7 @@ function clickBackBtn() {
 }
 
 async function clickApplyBtn() {
-
+    window.location.href = "../departmentWheels/departmentWheels.html"; //вне зависимости от выбора на странице, осуществляется переход на шаблонную страницу с кружками
 }
 
 /* <div>

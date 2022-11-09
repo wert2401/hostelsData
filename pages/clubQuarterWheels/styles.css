@@ -1,0 +1,5 @@
+.wheels{
+    display: flex;
+    flex-direction: row;
+    margin: 3% 0;
+}

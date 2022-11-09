@@ -46,3 +46,16 @@ h2 {
 #canvas {
     pointer-events: none;
 }
+
+.wheel {
+    margin: 0 auto;
+    color: #DBFF00;
+    max-width: 30vw;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
