@@ -3,22 +3,30 @@ function clickBackBtn() {
 }
 
 async function clickApplyBtn() {
-    window.location.href = "../departmentWheels/departmentWheels.html"; //вне зависимости от выбора на странице, осуществляется переход на шаблонную страницу с кружками
+    let ch = document.querySelector('input[name="department"]:checked').value;
+
+    if (ch == "" || ch == null || ch == undefined)
+        return;
+
+    await data.setDepChoice(ch);
+    window.location.href = "../departmentWheels/departmentWheels.html";
 }
 
-/* <div>
-    <input type="radio" id="departmentChoice"
-        name="department" value="firstDepartment" checked>
-    <label for="departmentChoice1">5 общежитие</label>
-</div> */
-
 (async() => {
+    let form = document.getElementsByTagName("form")[0];
+
     let alldata = await data.all();
     let filter = await data.getFilter();
-    console.log(alldata);
-    console.log(filter.columnGroup);
+
     let divided = data.divideByGroups(alldata, filter.columnGroup)
-    console.log(Object.keys(divided));
-
-
+    let keys = Object.keys(Object.values(divided)[0]);
+    keys.forEach(k => {
+        form.innerHTML += `
+        <div>
+            <input type="radio" id="departmentChoice"
+            name="department" value="${k}" checked>
+            <label for="departmentChoice${k}">${k}</label>
+        </div>
+        `
+    })
 })();

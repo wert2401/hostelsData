@@ -2,44 +2,44 @@ function clickBackBtn() {
     window.location.href = "../сomparisonChoice/comparisonChoice.html";
 }
 
-async function clickApplyBtn() {
-
-}
-
 (async() => {
+    let wheels = document.getElementsByClassName("wheels")[0];
+    wheels.innerHTML = "";
+    let counter = 0;
     let filter = await data.getFilter();
     let alldata = await data.all();
-    let averData = data.avarageByKeys(alldata);
 
-    console.log(filter);
-    console.log(data.avarageByKeys(alldata));
+    let divided = data.divideByGroups(alldata, filter.columnGroup);
 
-    var config = {};
+    Object.keys(divided).forEach(async key => {
+        counter += 1;
+        let id = "cavnas" + counter;
+        wheels.innerHTML += `
+            <div class="wheel">
+                <canvas id="${id}" width="500" height="500" style="font: 25px sans-serif;"></canvas>
+                <span>${key}</span>
+            </div>
+        `
 
-    config.segments = await wheelService.getConfigSegments(averData);
+        var config = {};
 
-    config.radius = 200; // optional. Default calculated based in canvas size
-    config.levels = 10; // optional. Default 10
-    config.fontSize = 15; // optional. Default 15px
+        console.log(key);
+        let av = data.avarageByKeys(divided[key]);
+        console.log(av)
 
-    let canvas1 = document.getElementById("canvas1");
+        config.segments = await wheelService.getConfigSegments(av);
 
-    const wheel1 = new Wheel(canvas1, config);
-    wheel1.draw();
+        console.log(config.segments)
 
-    canvas1.click(false);
+        config.radius = 200; // optional. Default calculated based in canvas size
+        config.levels = 10; // optional. Default 10
+        config.fontSize = 15; // optional. Default 15px
 
-    let canvas2 = document.getElementById("canvas2");
+        let canvas = document.getElementById(id);
 
-    const wheel2 = new Wheel(canvas2, config);
-    wheel2.draw();
+        const wheel = new Wheel(canvas, config);
+        wheel.draw();
 
-    canvas2.click(false);
-
-    let canvas3 = document.getElementById("canvas3");
-
-    const wheel3 = new Wheel(canvas3, config);
-    wheel3.draw();
-
-    canvas3.click(false);
+        canvas.click(false);
+    });
 })();

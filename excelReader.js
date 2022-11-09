@@ -23,31 +23,30 @@ async function convertExcelFileToJsonUsingXlsx() {
 }
 
 function getGroupsByColumnName(data, columnName) {
-    let temp = []
+    let temp = {}
+
     Object.keys(data).forEach(k => {
-        temp = temp.concat(data[k]);
+        let groupsId = []
+        data[k].forEach(element => {
+            if (!groupsId.includes(element[columnName])) {
+                groupsId.push(element[columnName]);
+            }
+        });
+
+        let divData = {}
+
+        groupsId.forEach(element => {
+            divData[element] = [];
+        });
+
+        data[k].forEach(element => {
+            divData[element[columnName]].push(element);
+        });
+
+        temp[k] = divData;
     })
 
-    data = temp;
-
-    let groupsId = []
-    data.forEach(element => {
-        if (!groupsId.includes(element[columnName])) {
-            groupsId.push(element[columnName]);
-        }
-    });
-
-    let divData = {}
-
-    groupsId.forEach(element => {
-        divData[element] = [];
-    });
-
-    data.forEach(element => {
-        divData[element[columnName]].push(element);
-    });
-
-    return divData;
+    return temp;
 }
 
 function getValuesWithKeys(obj) {
@@ -100,38 +99,6 @@ function getAvarageValuesByKeys(obj) {
     return res;
 }
 
-function getAvarageValuesByGroups(dividedData) {
-    let avarage = {}
-    let groupsId = Object.keys(dividedData);
-
-    groupsId.forEach(group => {
-        let values = {};
-
-        dividedData[group].forEach(element => {
-            let columns = Object.keys(element)
-            columns.forEach(column => {
-                if (typeof element[column] == 'number') {
-                    let num = Number.parseFloat(element[column]);
-
-                    if (Object.keys(values).includes(column))
-                        values[column] += num;
-                    else
-                        values[column] = num;
-                }
-            });
-        });
-
-        let columns = Object.keys(values)
-        columns.forEach(col => {
-            values[col] = values[col] / dividedData[group].length;
-        });
-
-        avarage[group] = values;
-    });
-
-    return avarage;
-}
-
 function openAndSetFilePath() {
     return ipcRenderer.invoke('dialog:openFile').then(c => {
         ipcRenderer.invoke("setFilePath", c);
@@ -150,19 +117,28 @@ async function GetFilter() {
     return await ipcRenderer.invoke("getFilter");
 }
 
+async function SetDepChoice(depChoice) {
+    return await ipcRenderer.invoke("setDepChoice", depChoice);
+}
+
+async function GetDepChoice() {
+    return await ipcRenderer.invoke("getDepChoice");
+}
+
 contextBridge.exposeInMainWorld('data', {
     all: async() => await convertExcelFileToJsonUsingXlsx(),
     divideByGroups: (data, columnName) => getGroupsByColumnName(data, columnName),
-    avarage: (dividedData) => getAvarageValuesByGroups(dividedData),
     avarageByKeys: (obj) => getAvarageValuesByKeys(obj),
     openFile: () => openAndSetFilePath(),
     file: () => getFilePath(),
     setFilter: async(filter) => await SetFilter(filter),
     getFilter: async() => await GetFilter(),
+    setDepChoice: async(depChoice) => await SetDepChoice(depChoice),
+    getDepChoice: async() => await GetDepChoice(),
 });
 
 async function getConfingSegments(data) {
-    segments = []
+    let segments = []
     filter = await GetFilter();
     Object.keys(data).forEach(el => {
         if (!filter.unsedColumns.includes(el)) {

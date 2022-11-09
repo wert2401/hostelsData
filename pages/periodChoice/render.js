@@ -3,29 +3,31 @@ function clickBackBtn() {
 }
 
 async function clickApplyBtn() {
-    window.location.href = "../quarterWheels/quarterWheels.html"; //вне зависимости от выбора на странице, осуществляется переход на шаблонную страницу с кружками
+    let ch = document.querySelector('input[name="period"]:checked').value;
+
+    if (ch == "" || ch == null || ch == undefined)
+        return;
+
+    await data.setDepChoice(ch);
+    window.location.href = "../quarterWheels/quarterWheels.html";
 }
 
 (async() => {
-    let filter = await data.getFilter();
+    let form = document.getElementsByTagName("form")[0];
+    form.innerHTML = "";
+
     let alldata = await data.all();
-    let averData = data.avarageByKeys(alldata);
+    let filter = await data.getFilter();
 
-    console.log(filter);
-    console.log(data.avarageByKeys(alldata));
-
-    var config = {};
-
-    config.segments = await wheelService.getConfigSegments(averData);
-
-    config.radius = 200; // optional. Default calculated based in canvas size
-    config.levels = 10; // optional. Default 10
-    config.fontSize = 15; // optional. Default 15px
-
-    let canvas = document.getElementById("canvas");
-
-    const wheel = new Wheel(canvas, config);
-    wheel.draw();
-
-    canvas.click(false);
+    let divided = data.divideByGroups(alldata, filter.columnGroup)
+    let keys = Object.keys(divided);
+    keys.forEach(k => {
+        form.innerHTML += `
+        <div>
+            <input type="radio" id="periodChoice"
+                name="period" value="${k}" checked>
+            <label for="periodChoice1">${k}</label>
+        </div>
+        `
+    })
 })();

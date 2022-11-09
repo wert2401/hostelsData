@@ -6,7 +6,8 @@ let MyState = {
     filter: {
         columnGroup: "",
         unsedColumns: []
-    }
+    },
+    depChoice: "",
 }
 
 async function handleFileOpen() {
@@ -34,6 +35,14 @@ async function setFilter(event, filter) {
     MyState.filter = filter;
 }
 
+async function setDepChoice(event, depChoice) {
+    MyState.depChoice = depChoice;
+}
+
+async function getDepChoice() {
+    return MyState.depChoice;
+}
+
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 1200,
@@ -53,6 +62,8 @@ app.whenReady().then(() => {
     ipcMain.handle("setFilePath", setFilePath)
     ipcMain.handle("getFilter", getFilter)
     ipcMain.handle("setFilter", setFilter)
+    ipcMain.handle("setDepChoice", setDepChoice)
+    ipcMain.handle("getDepChoice", getDepChoice)
     createWindow()
 })
 
