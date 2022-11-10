@@ -15,7 +15,7 @@ async function clickApplyBtn() {
     })
 
     let filter = {
-        columnGroup: document.getElementById("coloumnGroup").value,
+        columnGroup: document.getElementById("columnGroup").value,
         unsedColumns: unusedCoolumns
     }
 
@@ -31,12 +31,12 @@ data.all().then(d => {
         let node = document.createElement("option");
         node.innerHTML = k;
         node.value = k;
-        document.getElementById("coloumnGroup").appendChild(node);
+        document.getElementById("columnGroup").appendChild(node);
 
-        document.getElementById("filterColunmns").innerHTML += `
+        document.getElementById("filterColumns").innerHTML += `
         <div>
             <input type="checkbox" id="col${count}" name="exclude_cols" value="${k}" />
-            <label for="col1">${k}</label>
+            <label for="col${count}">${k}</label>
         </div>
         `;
 

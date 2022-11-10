@@ -143,10 +143,12 @@ async function getConfingSegments(data) {
     Object.keys(data).forEach(el => {
         if (!filter.unsedColumns.includes(el)) {
             let color = "#5CB975";
-            if (data[el < 5])
-                color = "#EE685D";
-            if (data[el] < 8)
+            if (data[el] >= 5 && data[el] < 8) {
                 color = "#FBC937";
+            }
+            if (data[el] < 5) {
+                color = "#EE685D";
+            }
             segments.push({ color: color, text: el, level: data[el] })
         }
     })

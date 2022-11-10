@@ -24,9 +24,9 @@ async function clickApplyBtn() {
     keys.forEach(k => {
         form.innerHTML += `
         <div>
-            <input type="radio" id="periodChoice"
+            <input type="radio" id="periodChoice${k}"
                 name="period" value="${k}" checked>
-            <label for="periodChoice1">${k}</label>
+            <label for="periodChoice${k}">${k}</label>
         </div>
         `
     })

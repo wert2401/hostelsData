@@ -1,18 +1,19 @@
 .window{
     width: 100vw;
-    height: 50vh;
+    min-height: 50vh;
     color: #DBFF00;
     font-family: 'Inter';
     font-weight: 400;
     font-size: 24px;
     display:flex;
+    justify-content: center;
 }
 
 form{
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 0 0 0 35%;
+    min-height: 300px;
 }
 
   
