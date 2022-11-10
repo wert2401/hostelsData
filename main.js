@@ -50,7 +50,8 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, 'excelReader.js')
-        }
+        },
+        icon: __dirname + '/wheel_icon.ico',
     })
 
     win.loadFile('pages/main/main.html')
