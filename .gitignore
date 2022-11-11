@@ -28,6 +28,8 @@ compile_commands.json
 /npm/path.txt
 /npm/checksums.json
 
+/WheelOfBalance-win32-x64
+
 .npmrc
 
 # Generated API definitions
